@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('fullStackTemplate')
-.config(function($stateProvider, $urlRouterProvider){
+.config(function($stateProvider, $urlRouterProvider, toastrConfig){
   $stateProvider
   .state('splash', {
     url             :    '/',
@@ -37,7 +37,16 @@ angular.module('fullStackTemplate')
   })
   .state('logout', {
     url             :    '/logout',
-    controller      :    'logoutController'
+    controller      :    'logoutController',
+    resolve         :     {
+      logoutUser : function(Auth){
+        Auth.logoutUser()
+        .then(res => {
+          $scope.$emit('loggedOut');
+          $scope.go('/');
+        })
+        .catch(_=> $state.go('/'))
+    }
   })
   .state('forgot', {
     url             :    '/forgot',
@@ -59,4 +68,31 @@ angular.module('fullStackTemplate')
     }
   });
   $urlRouterProvider.otherwise('/');
+
+  angular.extend(toastrConfig, {
+   allowHtml: false,
+   closeButton: false,
+   closeHtml: '<button>&times;</button>',
+   extendedTimeOut: 1000,
+   iconClasses: {
+     error: 'toast-error',
+     info: 'toast-info',
+     success: 'toast-success',
+     warning: 'toast-warning'
+   },
+   messageClass: 'toast-message',
+   onHidden: null,  // cb()'s
+   onShown: null,   //
+   onTap: null,     //
+   progressBar: false,
+   tapToDismiss: true,
+   templates: {
+     toast: 'directives/toast/toast.html',
+     progressbar: 'directives/progressbar/progressbar.html'
+   },
+   timeOut: 5000,
+   titleClass: 'toast-title',
+   toastClass: 'toast'
+ });
+ // Detailed Info @ https://github.com/Foxandxss/angular-toastr
 });

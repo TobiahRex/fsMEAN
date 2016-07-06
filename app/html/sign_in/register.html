@@ -18,13 +18,13 @@
           <input ng-model='registerObj.Avatar' type="text" class="form-control " placeholder="Avatar URL">
           <br>
           <div class="fileinput fileinput-new " data-provider='fileinput'>
-            <span class="btn btn-warning btn-file">Choose Image File</span><br>
-            <span ng-model='registerObj.AvatarFile' class="fileinput-new">No File Chosen</span>
+            <input class="btn btn-info btn-sm btn-file" type='file' name='file' style="font-size: 12px; color : #DEDEDE">Choose Image File</input><br>
+            <small ng-model='registerObj.AvatarFile' class="fileinput-new">No File Chosen</small>
           </div>
           <br>
           <textarea ng-model='registerObj.Bio' class='form-control' placeholder="Bio"></textarea>
           <hr>
-          <button type='submit' class="btn btn-info btn-lg">Register</button>
+          <button type='submit' class="btn btn-warning btn-lg">Register</button>
         </form>
         <hr>
         <p><a ui-sref="login">Login</a></p>

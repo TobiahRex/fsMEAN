@@ -29,14 +29,14 @@ a.to-splash:hover {
   color: white;
 }
 
-button.btn, .btn-warning {
-  color: #000000;
+button.btn, .btn-info, .btn-warning {
+  color: #242424 ;
   font-size: 16px;
 }
 
-button.btn:hover, .btn-warning:hover {
-  color: #000000;
-  font-size: 17px;
+button.btn:hover, .btn-info:hover {
+  color: #242424;
+  font-size: 16px;
 }
 
 .signature-nav {
@@ -50,6 +50,6 @@ div.enter-button > button.btn-primary.btn-lg {
 
 .form-control {
   background-color: #060606;
-  font-size: 18px;
+  font-size: 17px;
   color: #2a9fd6
 }
