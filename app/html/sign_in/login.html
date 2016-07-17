@@ -23,10 +23,18 @@
       <button ng-click='loginUser(loginObj)' type='submit' class="btn btn-success ">Sign In</button>
       <br>
       <br>
-      <small><a ui-sref="forgot" style='color: #817F7F'>Forgot Password?</a></small>
+      <small ui-sref="forgot"> Forgot Password? </small>
       <br>
       <br>
-      <p><a ui-sref='register'>Need an Account?</a></p>
+      <p ui-sref="register" class='text-primary'>Need an Account?</p>
+      <div class="row">
+        <a ng-click="authenticate('facebook')" class="col-xs-2 social-buttons col-xs-offset-2" ><i class="fa fa-5x fa-facebook-square text-primary"></i></a>
+        <a ng-click="authenticate('github')" class="col-xs-2 social-buttons"><i class="fa fa-5x fa-github text-primary"></i></a>
+        <a ng-click="authenticate('twitter')" class="col-xs-2 social-buttons"><i class="fa fa-5x fa-twitter-square text-primary"></i></a>
+        <a ng-click="authenticate('instagram')" class="col-xs-2 social-buttons"><i class="fa fa-5x fa-instagram text-primary"></i></a>
+      </div>
+      <br>
+      <p class="lead">Login with a Social Network</p>
     </div>
   </div>
 </div>

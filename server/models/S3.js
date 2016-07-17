@@ -1,9 +1,6 @@
 const AWS = require('aws-sdk');
 const mongoose = require('mongoose');
-// const uuid = require('uuid');
-
 const s3 = new AWS.S3();
-
 const bucketName = process.env.AWS_BUCKET;
 const urlBase = process.env.AWS_URL_BASE;
 const imageSchema = new mongoose.Schema({

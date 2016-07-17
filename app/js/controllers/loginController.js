@@ -1,13 +1,20 @@
-'use strict';
-angular.module('fullStackTemplate')
-.controller('loginController', function($scope, $state, Auth){
+function loginController($scope, $state, $auth) {
   console.log('loginCtrl');
   $scope.loginUser = loginObj => {
-    Auth.loginUser(loginObj)
-    .then(dataObj =>{
-      if(dataObj.status !== 200) return console.log('login failed.', dataObj.data);
+    $auth.login(loginObj)
+    .then(dataObj => {
+      if (dataObj.status !== 200) console.log('login failed.', dataObj.data);
       $scope.$emit('loggedIn');
       $state.go('profile');
-    });
+    })
+    .catch(err => console.log('ERROR: ', err));
   };
-});
+
+  $scope.authenticate = provider => {
+    $auth.authenticate(provider)
+    .then(() => $scope.$emit('loggedIn'))
+    .catch(err => console.error('ERROR: login error', err));
+  };
+}
+
+angular.module('fullStackTemplate').controller('loginController', loginController);

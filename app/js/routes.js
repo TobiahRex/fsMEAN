@@ -1,39 +1,36 @@
-'use strict';
-
-angular.module('fullStackTemplate')
-.config(function($stateProvider, $urlRouterProvider, toastrConfig){
+function stateProvider($stateProvider, $urlRouterProvider, toastrConfig) {
   $stateProvider
   .state('splash', {
     url: '/',
     templateUrl: 'html/splash.html',
-    controller: 'splashController'
+    controller: 'splashController',
   })
   .state('home', {
     url: '/home',
     templateUrl: 'html/home.html',
-    controller: 'homeController'
+    controller: 'homeController',
   })
   .state('register', {
     url: '/register',
     templateUrl: 'html/sign_in/register.html',
-    controller: 'registerController'
+    controller: 'registerController',
   })
   .state('verify', {
     url: '/verify',
-    templateUrl: 'html/sign_in/verify.html'
+    templateUrl: 'html/sign_in/verify.html',
   })
   .state('verified', {
     url: '/verified',
-    templateUrl: 'html/sign_in/verified.html'
+    templateUrl: 'html/sign_in/verified.html',
   })
   .state('unverified', {
     url: '/unverified',
-    templateUrl: 'html/sign_in/unverified.html'
+    templateUrl: 'html/sign_in/unverified.html',
   })
   .state('login', {
     url: '/login',
     templateUrl: 'html/sign_in/login.html',
-    controller: 'loginController'
+    controller: 'loginController',
   })
   .state('logout', {
     url: '/logout',
@@ -69,7 +66,6 @@ angular.module('fullStackTemplate')
     },
   });
   $urlRouterProvider.otherwise('/');
-
   angular.extend(toastrConfig, {
     allowHtml: false,
     closeButton: false,
@@ -79,7 +75,7 @@ angular.module('fullStackTemplate')
       error: 'toast-error',
       info: 'toast-info',
       success: 'toast-success',
-      warning: 'toast-warning'
+      warning: 'toast-warning',
     },
     messageClass: 'toast-message',
     onHidden: null,  // cb()'s
@@ -89,11 +85,13 @@ angular.module('fullStackTemplate')
     tapToDismiss: true,
     templates: {
       toast: 'directives/toast/toast.html',
-      progressbar: 'directives/progressbar/progressbar.html'
+      progressbar: 'directives/progressbar/progressbar.html',
     },
     timeOut: 5000,
     titleClass: 'toast-title',
-    toastClass: 'toast'
+    toastClass: 'toast',
   });
   // Detailed Info @ https://github.com/Foxandxss/angular-toastr
-});
+}
+
+angular.module('fullStackTemplate').config(stateProvider);
