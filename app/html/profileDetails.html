@@ -5,4 +5,7 @@
     <span class="label">Email</span><br><p class="lead text-primary">{{profile.Email}}</p>
     <span class="label">Last Login:</span><br><p class="lead text-primary">{{profile.LastLogin | date}}</p>
   </blockquote>
+  <footer>
+    <button ng-click='editProfile(profile)' class='btn btn-default btn-xs'><i class="fa fa-edit text-inverse"></i><small class="text-inverse"> Edit Profile</small></button>
+  </footer>
 </div>
