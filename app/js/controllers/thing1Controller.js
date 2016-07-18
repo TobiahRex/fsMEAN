@@ -31,7 +31,7 @@ function thing1Controller($scope, $state, $log, $uibModal, thingService) {
   renderThings();
   // ////////////////////////////////////////////////////////////////////
   // Add Thing
-  $scope.addThing = () => {
+  vm.addThing = () => {
     console.log('click');
     const modalInstance = $uibModal.open({
       keyboard: true,

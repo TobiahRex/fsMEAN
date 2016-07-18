@@ -1,23 +1,22 @@
-'use strict';
-
-angular.module('fullStackTemplate')
-.controller('insertPhotoModalController', function ($scope, $uibModalInstance, dbPhotos, album) {
+function insertThingController($scope, $uibModalInstance, dbPhotos, album) {
   console.log('insertPhotoModalController');
 
   $scope.Photos = dbPhotos.data;
-  let thisAlbum = album.album._id;
+  const thisAlbum = album.album._id;
 
   $scope.insertPhoto = photo => {
-    let addPhoto = angular.copy(photo);
+    const addPhoto = angular.copy(photo);
 
-    let idObj = {
-      albumId : thisAlbum,
-      photoId : addPhoto.photo._id
-    }
+    const idObj = {
+      albumId: thisAlbum,
+      photoId: addPhoto.photo._id,
+    };
     $uibModalInstance.close(idObj);
   };
 
   $scope.cancel = () => {
     $uibModalInstance.dismiss();
   };
-});
+}
+
+angular.module('fullStackTemplate').controller('insertPhotoModalController', insertThingController);
