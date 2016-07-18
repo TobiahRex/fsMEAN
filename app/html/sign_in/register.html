@@ -17,11 +17,36 @@
           <br>
           <input ng-model='registerObj.Avatar' type="text" class="form-control " placeholder="Avatar URL">
           <br>
-          <div class="fileinput fileinput-new " data-provider='fileinput'>
+          <!-- <div class="fileinput fileinput-new " data-provider='fileinput'>
             <input class="btn btn-info btn-sm btn-file" type='file' name='file' style="font-size: 12px; color : #DEDEDE">Choose Image File</input><br>
             <small ng-model='registerObj.AvatarFile' class="fileinput-new"></small>
-          </div>
+          </div> -->
+          <!-- uploadForm -->
+          <form name="uploadForm" ng-submit='submit(file)'>
+            <button class="btn btn-xs btn-info"
+            ng-model="file"
+            name="newFile"
+            ngf-select
+            ngf-pattern="'image/*'"
+            ngf-accept="'image/*'"
+            ngf-max-size="20MB"
+            ngf-min-height="100">Select File</button>
+            <button class='btn btn-xs btn-primary'>Upload</button>
+            <br><br>
+            <span class="text-warning">OR </span><span>Drop Images or PDFs files...</span>
+          </form>
           <br>
+          <fieldset>
+            <legend> </legend>
+            <div ngf-drop="upload($files)" class="drop-box" ngf-drag-over-class="'dragover'">
+              <span class="text-danger">HERE</span>
+            </div>
+            <br>
+            <legend></legend>
+          </fieldset>
+          <br>
+          <pre class='text-left'>{{file | json}}</pre>
+          <!-- end -->
           <textarea ng-model='registerObj.Bio' class='form-control' placeholder="Bio"></textarea>
           <hr>
           <button type='submit' class="btn btn-warning btn-lg">Register</button>

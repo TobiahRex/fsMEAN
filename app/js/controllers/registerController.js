@@ -1,4 +1,4 @@
-function registerController($scope, $state, $auth, Auth, toastr) {
+function registerController($scope, $state, $auth, Auth, toastr, Upload) {
   console.log('registerCtrl');
 
   const userObj = {
@@ -11,6 +11,7 @@ function registerController($scope, $state, $auth, Auth, toastr) {
     Bio: '',
     Avatar: '',
   };
+
   $scope.registerNewUser = registerObj => {
     if (registerObj.password !== registerObj._Password) {
       return console.log('ERROR: Passwords do not match.');
@@ -42,6 +43,20 @@ function registerController($scope, $state, $auth, Auth, toastr) {
       $state.go('home');
     });
   };
+
+  $scope.upload = file => upload(file);
+  function upload(file) {
+    Upload.upload({
+      url: '/api/images',
+      data: { newFile: file },
+    })
+    .then(res => {
+      console.log('res:', res);
+    })
+    .catch(err => {
+      console.log('err:', err);
+    });
+  }
 }
 
 angular.module('fullStackTemplate').controller('registerController', registerController);

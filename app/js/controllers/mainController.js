@@ -20,10 +20,11 @@ function main($state, $scope, $auth, Auth, toastr) {
       $auth.logout();
       toastr.info('You have been successfully logged out.',
       'Logged Out', { iconClass: 'toast-logout' });
+      loginCheck();
       $state.go('login');
     })
     .catch((err) => {
-      toastr.error(`Could not logout: ${err}`, 'Error')
+      toastr.error(`Could not logout: ${err}`, 'Error');
       console.error(err);
     });
   }

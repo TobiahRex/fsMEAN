@@ -1,5 +1,6 @@
 angular.module('fullStackTemplate',
 ['ngAnimate',
+'ngFileUpload',
 'ui.bootstrap',
 'ui.router',
 'oitozero.ngSweetAlert',
