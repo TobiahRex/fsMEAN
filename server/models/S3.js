@@ -3,9 +3,10 @@ const mongoose = require('mongoose');
 const s3 = new AWS.S3();
 const bucketName = process.env.AWS_BUCKET;
 const urlBase = process.env.AWS_URL_BASE;
+
 const imageSchema = new mongoose.Schema({
   url: { type: String, required: true },
-  name: { type: String, required: true},
+  name: { type: String, required: true },
   createdAt: { type: Date, default: Date.now },
 });
 
@@ -31,11 +32,18 @@ const params = {
   Body: File.buffer
 };
 
+function createS3Bucket(name) {
+  s3.createBucket({ Bucket: name }, (err, data) => {
+    console.log('err: ', err);
+    console.log('data: ', data);
+  });
+}
+
 s3.putObject(params, (err, result) => {
   if (err) return cb(err);
 
-  const imgUrl.........................
-})
+  // const imgUrl.........................
+});
 
 const Image = mongoose.model('Image', imageSchema);
 module.exports = Image;
