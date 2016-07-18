@@ -1,4 +1,4 @@
-const PORT = process.env.PORT || 4000;
+const PORT = process.env.PORT || 3000;
 const mongoose = require('mongoose');
 const moment = require('moment');
 const JWT = require('jsonwebtoken');
@@ -80,7 +80,7 @@ userSchema.statics.register = function(newUserObj, cb){
   User.findOne({Email : newUserObj.Email}, (err, dbUser)=>{
     if(err || dbUser) return cb(err || {ERROR : `That Email has already been taken.`});
   });
-
+  console.log('hi', newUserObj);
   BCRYPT.hash(newUserObj._Password, 12, (err, hash) => {
     if (err) cb(err);
 
@@ -117,7 +117,7 @@ userSchema.methods.profileLink = function() {
 
 userSchema.statics.emailVerify = (token, cb) => {
   if (!token) return cb({ ERROR: 'Token not recieved.' });
-
+  console.log('token: ', token);
   return JWT.verify(token, JWT_SECRET, (err, payload) => {
     if (err) return cb(err);
     return User.findById(payload._id, (err, dbUser) => {
@@ -153,7 +153,7 @@ userSchema.statics.authenticate = (UserObj, cb) => {
 userSchema.statics.authorize = function(clearance = { Admin: false }) {
   return function (req, res, next) {
     console.log('req.headers: ', req.headers);
-    const tokenHeader = req.headers.authorization; 
+    const tokenHeader = req.headers.authorization;
     console.log('tokenHeader: ', tokenHeader);
     if (!tokenHeader) return res.status(400).send({ ERROR: 'User not found' });
     const token = tokenHeader.split(' ')[1];

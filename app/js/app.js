@@ -6,4 +6,5 @@ angular.module('fullStackTemplate',
 'angularMoment',
 'btford.socket-io',
 'satellizer',
-'toastr']);
+'toastr',
+'angular-loading-bar']);

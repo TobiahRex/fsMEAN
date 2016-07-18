@@ -1,10 +1,7 @@
-'use strict';
-
-angular.module('fullStackTemplate')
-.controller('profileController', function($state, $scope, Auth, dbProfile, Profile){
+function profile($state, $scope, Auth, dbProfile) {
   console.log('profileCtrl');
+  const vm = $scope;
+  vm.profile = dbProfile.data;
+}
 
-  $scope.profile = dbProfile.data;
-
-  $scope.newItems = () => $scope.$broadcast('getNewItems'); // listener @ newItemController
-});
+angular.module('fullStackTemplate').controller('profileController', profile);

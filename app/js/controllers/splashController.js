@@ -1,12 +1,11 @@
-'use strict';
-
-angular.module('fullStackTemplate')
-.controller('splashController', function($scope, $state){
+function splashController($scope, $state) {
   console.log('splashCtrl');
+  const vm = $scope;
+  vm.goToHome = goToHome;
 
-  $scope.goToHome = () => {
+  function goToHome() {
     $state.go('home');
-  };
+  }
+}
 
-
-});
+angular.module('fullStackTemplate').controller('splashController', splashController);

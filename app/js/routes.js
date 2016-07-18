@@ -1,4 +1,7 @@
-function stateProvider($stateProvider, $urlRouterProvider, toastrConfig) {
+function stateProvider($stateProvider, $urlRouterProvider, $authProvider, toastrConfig) {
+  $authProvider.loginUrl = '/api/users/login';
+  $authProvider.signupUrl = '/api/users/register';
+
   $stateProvider
   .state('splash', {
     url: '/',
@@ -31,6 +34,7 @@ function stateProvider($stateProvider, $urlRouterProvider, toastrConfig) {
     url: '/login',
     templateUrl: 'html/sign_in/login.html',
     controller: 'loginController',
+    controllerAs: 'login'
   })
   .state('logout', {
     url: '/logout',
@@ -52,7 +56,7 @@ function stateProvider($stateProvider, $urlRouterProvider, toastrConfig) {
     controller: 'forgotController',
   })
   .state('profile', {
-    url: '/profile',
+    url: '/profile/:id',
     templateUrl: 'html/profile.html',
     controller: 'profileController',
     resolve: {
@@ -64,7 +68,33 @@ function stateProvider($stateProvider, $urlRouterProvider, toastrConfig) {
         });
       },
     },
+  })
+  .state('profile.thing1', {
+    url: '/thing1',
+    templateUrl: 'html/thing1.html',
+    controller: 'thing1Controller',
+  })
+  .state('profile.thing2', {
+    url: '/profile/thing2',
+    templateUrl: 'html/thing2.html',
+    controller: 'thing2Controller',
+  })
+  .state('profile.allThings', {
+    url: '/profile/allThings',
+    templateUrl: 'html/allThings.html',
+    controller: 'allThingsController',
+  })
+  .state('profile.details', {
+    url: '/bio',
+    templateUrl: 'html/profileDetails.html',
+    controller: 'profileDetailsController',
+  })
+  .state('profile.account', {
+    url: '/account',
+    templateUrl: 'html/account.html',
+    controller: 'accountController'
   });
+
   $urlRouterProvider.otherwise('/');
   angular.extend(toastrConfig, {
     allowHtml: false,
