@@ -1,5 +1,5 @@
 function deleteThing1Controller($scope, $uibModalInstance, thing2Delete) {
-  console.log('deleteAlbumModalController');
+  console.log('deleteThing1Controller');
   const vm = $scope;
   vm.thing = thing2Delete.thing;
   vm.deleteThing1 = deleteThing1;
@@ -14,4 +14,4 @@ function deleteThing1Controller($scope, $uibModalInstance, thing2Delete) {
   }
 }
 angular.module('fullStackTemplate')
-.controller('deleteAlbumModalController', deleteThing1Controller);
+.controller('deleteThing1Controller', deleteThing1Controller);

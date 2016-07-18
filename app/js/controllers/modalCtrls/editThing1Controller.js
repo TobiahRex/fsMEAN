@@ -1,5 +1,5 @@
-function editThing($uibModalInstance) {
-  console.log('editThingModalCtrl');
+function editThing1Controller($uibModalInstance) {
+  console.log('editThing1Ctrl');
   const vm = this;
   vm.thing = editThing.thing;
   console.log('vm.thing: ', vm.thing);
@@ -10,4 +10,4 @@ function editThing($uibModalInstance) {
   vm.cancel = () => $uibModalInstance.dismiss();
 }
 
-angular.module('fullStackTemplate').controller('editThing1Controller', editThing);
+angular.module('fullStackTemplate').controller('editThing1Controller', editThing1Controller);

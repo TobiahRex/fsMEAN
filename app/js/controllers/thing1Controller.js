@@ -3,40 +3,41 @@ function thing1Controller($scope, $state, $log, $uibModal, thingService) {
   const vm = $scope;
   console.log('currentUser: ', vm.currentUser);
   function renderThings() {
-    thingService.getThings(vm.currentUser)
-    .then((res) => {
-      vm.things = res.data;
-    })
-    .catch((err) => {
-      vm.things = err;
-    });
+    thingService.getThings(vm.currentUser);
+    // .then((res) => {
+    //   vm.things = res.data;
+    // })
+    // .catch((err) => {
+    //   vm.things = err;
+    // });
   }
   function addThing(thing) {
-    thingService.addThing(thing)
-    .then((res) => {
-      vm.things = res.data;
-    })
-    .catch((err) => console.error(err));
+    thingService.addThing(thing);
+    // .then((res) => {
+    //   vm.things = res.data;
+    // })
+    // .catch((err) => console.error(err));
   }
   function editThing(thing) {
-    thingService.editThing(thing, vm.currentUser._id)
-    .then(() => renderThings())
-    .catch((err) => console.error(err));
+    thingService.editThing(thing, vm.currentUser._id);
+    // .then(() => renderThings())
+    // .catch((err) => console.error(err));
   }
   function deleteThing(thing) {
-    thingService.removeThing(thing, vm.currentUser._id)
-    .then(() => renderThings())
-    .catch((err) => console.error(err));
+    thingService.removeThing(thing, vm.currentUser._id);
+    // .then(() => renderThings())
+    // .catch((err) => console.error(err));
   }
   renderThings();
   // ////////////////////////////////////////////////////////////////////
   // Add Thing
-  vm.addThing = () => {
+  $scope.addThing = () => {
+    console.log('click');
     const modalInstance = $uibModal.open({
       keyboard: true,
       animation: true,
-      templateUrl: '/uib/template/modal/addThingModal.html',
-      controller: 'addThingModalController',
+      templateUrl: '/uib/template/modal/addThing1.html',
+      controller: 'addThing1Controller',
       size: 'lg',
     });
     modalInstance.result.then(photo => addThing(photo),
@@ -48,8 +49,8 @@ function thing1Controller($scope, $state, $log, $uibModal, thingService) {
   vm.editThing = thing2Edit => {
     const modalInstance = $uibModal.open({
       animation: true,
-      templateUrl: '/uib/template/modal/editThingModal.html',
-      controller: 'editThingModalController',
+      templateUrl: '/uib/template/modal/editThing1.html',
+      controller: 'editThing1Controller',
       size: 'lg',
       resolve: { editThing: () => thing2Edit },
     });
@@ -62,8 +63,8 @@ function thing1Controller($scope, $state, $log, $uibModal, thingService) {
   vm.deleteThing = thing2Delete => {
     const modalInstance = $uibModal.open({
       animation: true,
-      templateUrl: '/uib/template/modal/deleteThingModal.html',
-      controller: 'deleteThingModalController',
+      templateUrl: '/uib/template/modal/deleteThing1.html',
+      controller: 'deleteThing1Controller',
       size: 'lg',
       resolve: { thing2Delete: () => thing2Delete },
     });

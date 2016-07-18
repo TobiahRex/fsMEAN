@@ -33,8 +33,7 @@ function stateProvider($stateProvider, $urlRouterProvider, $authProvider, toastr
   .state('login', {
     url: '/login',
     templateUrl: 'html/sign_in/login.html',
-    controller: 'loginController',
-    controllerAs: 'login'
+    controller: 'loginController'
   })
   .state('logout', {
     url: '/logout',

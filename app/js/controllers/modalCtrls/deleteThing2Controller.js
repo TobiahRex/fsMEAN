@@ -1,8 +1,4 @@
-
-'use strict';
-
-angular.module('fullStackTemplate')
-.controller('deletePhotoModalController', function ($scope, $uibModalInstance, Photo, deletePhoto) {
+function deleteThing2Controller($scope, $uibModalInstance, Photo, deletePhoto) {
   console.log('deletePhotoModalController');
   $scope.photo = deletePhoto.photo;
 
@@ -13,4 +9,7 @@ angular.module('fullStackTemplate')
   $scope.cancel = () => {
     $uibModalInstance.dismiss();
   };
-});
+}
+
+angular.module('fullStackTemplate')
+.controller('deletePhotoModalController', deleteThing2Controller);

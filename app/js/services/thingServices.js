@@ -1,17 +1,11 @@
-function thingService($http) {
-  this.getUsers = () => $http.get('/api/users');
+function thingService() {
+  this.getThings = () => console.log('getThings: ');
 
-  this.getUser = id => $http.get(`/api/users/${id}`);
+  this.addThing = thing => console.log('addThing: ', thing);
 
-  this.loginUser = userObj => $http.post('/api/users/login', userObj);
+  this.editThing = (userObj, id) => console.log('editThing: ', userObj);
 
-  this.logoutUser = () => $http.post('/api/users/logout');
-
-  this.registerUser = userObj => $http.post('/api/users/register', userObj);
-
-  this.getProfile = () => $http.get('/api/users/profile');
-
-  this.toggleAdmin = id => $http.put(`/api/users/${id}/toggle_admin`);
+  this.deleteThing = (thing, id) => console.log('deleteThing: ', thing);
 }
 
 angular.module('fullStackTemplate').service('thingService', thingService);

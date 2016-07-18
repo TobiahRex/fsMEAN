@@ -1,4 +1,4 @@
-function addThingModalController($scope, $uibModalInstance) {
+function addThing1Controller($scope, $uibModalInstance) {
   console.log('addAlbumModalCtrl');
   const vm = $scope;
   vm.createThing1 = createThing1;
@@ -14,4 +14,4 @@ function addThingModalController($scope, $uibModalInstance) {
   }
 }
 
-angular.module('fullStackTemplate').controller('addThingModalController', addThingModalController);
+angular.module('fullStackTemplate').controller('addThing1Controller', addThing1Controller);
