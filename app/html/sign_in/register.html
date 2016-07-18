@@ -4,7 +4,7 @@
       <h3>Register</h3>
       <hr>
       <div class="text-center">
-        <form ng-submit="registerNewUser(registerObj)">
+        <form ng-submit="registerNewUser(registerObj)" name='newUserForm'>
           <input ng-model='registerObj.name' type="text" class="form-control" placeholder="Name" required>
           <br>
           <input ng-model='registerObj.Email' type="text" class="form-control" placeholder="Email" required>
@@ -22,7 +22,7 @@
             <small ng-model='registerObj.AvatarFile' class="fileinput-new"></small>
           </div> -->
           <!-- uploadForm -->
-          <form name="uploadForm" ng-submit='submit(file)'>
+          <form name="uploadForm">
             <button class="btn btn-xs btn-info"
             ng-model="file"
             name="newFile"
@@ -31,9 +31,12 @@
             ngf-accept="'image/*'"
             ngf-max-size="20MB"
             ngf-min-height="100">Select File</button>
-            <button class='btn btn-xs btn-primary'>Upload</button>
+            <button type='button' ng-click='submit(file)' class='btn btn-xs btn-primary'>Upload</button>
             <br><br>
-            <span class="text-warning">OR </span><span>Drop Images or PDFs files...</span>
+            <img ngf-thumbnail='newFile' id='register-thumbnail'/>
+            <img id='register-avatar' ng-src='{{s3Image}}' ng-show='s3Image'/>
+            <br>
+            <span class="text-warning">OR </span><span>Drag and Drop images...</span>
           </form>
           <br>
           <fieldset>
@@ -45,7 +48,6 @@
             <legend></legend>
           </fieldset>
           <br>
-          <pre class='text-left'>{{file | json}}</pre>
           <!-- end -->
           <textarea ng-model='registerObj.Bio' class='form-control' placeholder="Bio"></textarea>
           <hr>
@@ -57,3 +59,4 @@
     </div>
   </div>
 </div>
+<pre class='text-left'>{{newUserForm | json}}</pre>

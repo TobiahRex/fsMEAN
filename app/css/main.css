@@ -79,3 +79,10 @@ i.fa.fa-5x.text-primary:hover {
   font-size: 16px !important;
   color: #E7E7E7 !important;
 }
+
+#register-avatar {
+  width: 25%
+}
+#register-thumbnail {
+  width: 25%;
+}

@@ -1,6 +1,6 @@
 function registerController($scope, $state, $auth, Auth, toastr, Upload) {
   console.log('registerCtrl');
-
+  const vm = $scope;
   const userObj = {
     Access: 'Not-Assigned',
     Username: '',
@@ -12,7 +12,7 @@ function registerController($scope, $state, $auth, Auth, toastr, Upload) {
     Avatar: '',
   };
 
-  $scope.registerNewUser = registerObj => {
+  vm.registerNewUser = registerObj => {
     if (registerObj.password !== registerObj._Password) {
       return console.log('ERROR: Passwords do not match.');
     }
@@ -44,14 +44,18 @@ function registerController($scope, $state, $auth, Auth, toastr, Upload) {
     });
   };
 
-  $scope.upload = file => upload(file);
+  vm.submit = file => upload(file);
+  
   function upload(file) {
     Upload.upload({
       url: '/api/images',
       data: { newFile: file },
     })
     .then(res => {
-      console.log('res:', res);
+      console.log('image:', res.data.url);
+
+      vm.s3Image = res.data.url;
+      console.log('vm.s3Image: ', vm.s3Image);
     })
     .catch(err => {
       console.log('err:', err);
