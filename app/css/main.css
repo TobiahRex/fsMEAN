@@ -81,10 +81,11 @@ i.fa.fa-5x.text-primary:hover {
 }
 
 #register-avatar {
-  width: 25%
+  max-width: 100px;
+  broder-radius: 50%;
 }
 
 #register-thumbnail {
-  width: 25%;
+  max-width: 100px;
   -webkit-filter: grayscale(100%);
 }

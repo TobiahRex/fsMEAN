@@ -4,7 +4,7 @@
       <h3>Register</h3>
       <hr>
       <div class="text-center">
-        <form ng-submit="registerNewUser(registerObj)" name='newUserForm'>
+        <form name='newUserForm'>
           <input ng-model='registerObj.name' type="text" class="form-control" placeholder="Name" required>
           <br>
           <input ng-model='registerObj.Email' type="text" class="form-control" placeholder="Email" required>
@@ -23,7 +23,8 @@
           </div> -->
           <!-- uploadForm -->
           <form name="uploadForm">
-            <button class="btn btn-xs btn-info"
+            <button type='button' class="btn btn-xs btn-info"
+            ng-hide='s3Image'
             ng-model="file"
             name="newFile"
             ngf-select
@@ -31,15 +32,16 @@
             ngf-accept="'image/*'"
             ngf-max-size="20MB"
             ngf-min-height="100">Select File</button>
-            <button type='button' ng-click='submit(file)' class='btn btn-xs btn-primary'>Upload</button>
+            <button ng-show='file' type='button' ng-click='submit(file)' class='btn btn-xs btn-primary'>Upload</button>
             <br><br>
-            <img ngf-thumbnail='file' id='register-thumbnail'/>
+            <span id='register-thumbnail' ng-hide='s3Image'>
+              <img ngf-thumbnail='file' id='register-thumbnail'/>
+            </span>
             <img id='register-avatar' ng-src='{{s3Image}}' ng-show='s3Image'/>
             <br>
-            <span class="text-warning">OR </span><span>Drag and Drop images...</span>
+            <span ng-hide='s3Image' class="text-warning">OR </span><span ng-hide='s3Image'>Drag and Drop images...</span>
           </form>
-          <br>
-          <fieldset>
+          <fieldset ng-hide='s3Image'>
             <legend> </legend>
             <div ngf-drop="upload($files)" class="drop-box" ngf-drag-over-class="'dragover'">
               <span class="text-danger">HERE</span>
@@ -51,7 +53,7 @@
           <!-- end -->
           <textarea ng-model='registerObj.Bio' class='form-control' placeholder="Bio"></textarea>
           <hr>
-          <button type='submit' class="btn btn-warning btn-lg">Register</button>
+          <button ng-click='registerNewUser(registerObj, s3Image)' class="btn btn-warning btn-lg">Register</button>
         </form>
         <hr>
         <p><a ui-sref="login">Login</a></p>

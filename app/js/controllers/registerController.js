@@ -1,6 +1,7 @@
 function registerController($scope, $state, $auth, Auth, toastr, Upload) {
   console.log('registerCtrl');
   const vm = $scope;
+  vm.s3Image = '';
   const userObj = {
     Access: 'Not-Assigned',
     Username: '',
@@ -12,16 +13,18 @@ function registerController($scope, $state, $auth, Auth, toastr, Upload) {
     Avatar: '',
   };
 
-  vm.registerNewUser = registerObj => {
+  vm.registerNewUser = (registerObj, s3Image) => {
+    console.log(registerObj, s3Image);
     if (registerObj.password !== registerObj._Password) {
-      return console.log('ERROR: Passwords do not match.');
+      return console.error('ERROR: Passwords do not match.');
     }
+    console.log(vm.s3Image);
     // build userObj from registerObj
     userObj.Username = registerObj.Username;
     userObj._Password = registerObj._Password;
     userObj.Email = registerObj.Email;
     userObj.Bio = registerObj.Bio;
-    userObj.Avatar = registerObj.Avatar || registerObj.AvatarFile;
+    userObj.Avatar = registerObj.Avatar || vm.s3Image;
     registerObj.name.split(' ').forEach((name, i) => {
       if (i === 0) {
         userObj.Firstname = name;
@@ -30,8 +33,7 @@ function registerController($scope, $state, $auth, Auth, toastr, Upload) {
       }
       return null;
     });
-
-    console.log('userObj: ', userObj);
+    console.log('userObj.url ', userObj.Avatar);
     return Auth.registerUser(userObj)
     .then(() => {
       toastr.info('Please check your Email for a registration link.',
@@ -39,13 +41,13 @@ function registerController($scope, $state, $auth, Auth, toastr, Upload) {
       $scope.$emit('loggedIn');
     })
     .catch(err => {
-      console.log('register error: ', err);
+      console.error(err);
       $state.go('home');
     });
   };
 
   vm.submit = file => upload(file);
-  
+
   function upload(file) {
     Upload.upload({
       url: '/api/images',
@@ -53,12 +55,11 @@ function registerController($scope, $state, $auth, Auth, toastr, Upload) {
     })
     .then(res => {
       console.log('image:', res.data.url);
-
       vm.s3Image = res.data.url;
       console.log('vm.s3Image: ', vm.s3Image);
     })
     .catch(err => {
-      console.log('err:', err);
+      console.error(err);
     });
   }
 }
