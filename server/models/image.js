@@ -8,9 +8,9 @@ const imageSchema = new mongoose.Schema({
   name: { type: String },
   key: { type: String },
 });
-const Image = mongoose.model('Image', imageSchema);
 
-console.log('s3: ', s3.delteObject);
+
+// console.log('s3: ', s3.deleteObject);
 imageSchema.statics.getAllImages = (cb) => {
   const params = { Bucket: bucketName };
   s3.listObjectsV2(params, cb);
@@ -19,23 +19,24 @@ imageSchema.statics.getAllImages = (cb) => {
 
 imageSchema.statics.removeImage = (imgKey, cb) => {
   if (!imgKey) return cb({ Error: 'Did not provide required Image Data.' });
-  Image.getAllImages((err1, result) => {
+  return Image.getAllImages((err1, result1) => {
     if (err1) return cb(err1);
-    const s3Key = result.Contents.map((image) => {
+
+    const s3Key = result1.Contents.map((image) => {
       if (image.Key === imgKey) return image;
       return null;
     });
     const params = {
       Bucket: bucketName,
-      Key: s3Key,
+      Key: s3Key[0].Key,
     };
-    s3.deleteObject(params, (err2, result) => {
-      if (err2) return cb(err2);
-      cb(null, result);
-    })
-  });
-}
 
+    return s3.deleteObject(params, (err2, result2) => {
+      if (err2) return cb(err2);
+      return cb(null, result2);
+    });
+  });
+};
 
 imageSchema.statics.upload = (file, cb) => {
   console.log('file.buffer: ', file.buffer, '\nfileoriginalName: ', file.originalname, '\nfile.mimetype: ', file.mimetype);
@@ -73,4 +74,5 @@ imageSchema.statics.upload = (file, cb) => {
   });
 };
 
+const Image = mongoose.model('Image', imageSchema);
 module.exports = Image;
