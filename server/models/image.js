@@ -8,6 +8,16 @@ const imageSchema = new mongoose.Schema({
   name: { type: String },
 });
 
+console.log('s3: ', s3.listObjects);
+imageSchema.statics.getImages = (cb) => {
+  const params = {
+    Bucket: bucketName
+  };
+
+  s3.listObjects(params, cb);
+};
+
+
 
 imageSchema.statics.upload = (file, cb) => {
   console.log('file.buffer: ', file.buffer, '\nfileoriginalName: ', file.originalname, '\nfile.mimetype: ', file.mimetype);
@@ -45,4 +55,7 @@ imageSchema.statics.upload = (file, cb) => {
   });
 };
 const Image = mongoose.model('Image', imageSchema);
+Image.getImages((err, result) => {
+  console.log('err: ', err, '\nresult: ', result.Contents);
+});
 module.exports = Image;

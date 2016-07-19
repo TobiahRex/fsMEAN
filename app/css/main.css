@@ -83,6 +83,8 @@ i.fa.fa-5x.text-primary:hover {
 #register-avatar {
   width: 25%
 }
+
 #register-thumbnail {
   width: 25%;
+  -webkit-filter: grayscale(100%);
 }
