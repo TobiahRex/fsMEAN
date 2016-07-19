@@ -6,17 +6,35 @@ const bucketName = process.env.AWS_BUCKET;
 const imageSchema = new mongoose.Schema({
   url: { type: String },
   name: { type: String },
+  key: { type: String },
 });
+const Image = mongoose.model('Image', imageSchema);
 
-console.log('s3: ', s3.listObjects);
-imageSchema.statics.getImages = (cb) => {
-  const params = {
-    Bucket: bucketName
-  };
-
-  s3.listObjects(params, cb);
+console.log('s3: ', s3.delteObject);
+imageSchema.statics.getAllImages = (cb) => {
+  const params = { Bucket: bucketName };
+  s3.listObjectsV2(params, cb);
 };
 
+
+imageSchema.statics.removeImage = (imgKey, cb) => {
+  if (!imgKey) return cb({ Error: 'Did not provide required Image Data.' });
+  Image.getAllImages((err1, result) => {
+    if (err1) return cb(err1);
+    const s3Key = result.Contents.map((image) => {
+      if (image.Key === imgKey) return image;
+      return null;
+    });
+    const params = {
+      Bucket: bucketName,
+      Key: s3Key,
+    };
+    s3.deleteObject(params, (err2, result) => {
+      if (err2) return cb(err2);
+      cb(null, result);
+    })
+  });
+}
 
 
 imageSchema.statics.upload = (file, cb) => {
@@ -54,8 +72,5 @@ imageSchema.statics.upload = (file, cb) => {
     }, cb);
   });
 };
-const Image = mongoose.model('Image', imageSchema);
-Image.getImages((err, result) => {
-  console.log('err: ', err, '\nresult: ', result.Contents);
-});
+
 module.exports = Image;
