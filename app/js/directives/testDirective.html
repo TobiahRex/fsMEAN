@@ -1,0 +1,19 @@
+<ul>
+  <h5>Avengers: </h5>
+  <li class='text-warning' ng-repeat='hero in avengers'>{{hero}}</li>
+</ul>
+
+<ul>
+  <h5>Villains:</h5>
+  <li class="text-danger" ng-repeat='villain in avenger_villains'>
+    <small class="text-primary">{{villain.name}}</small>
+    <br>
+    <small class="text-danger">{{villain.power}}</small>
+  </li>
+</ul>
+
+<h1>Custom Form</h1>
+<form ng-submit='onSubmit(formData)'>
+  <input type="text" ng-model='formData.value'>
+  <button>Submit</button>
+</form>

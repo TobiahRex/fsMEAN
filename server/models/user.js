@@ -152,7 +152,6 @@ userSchema.statics.authenticate = (UserObj, cb) => {
 
 userSchema.statics.authorize = function(clearance = { Admin: false }) {
   return function (req, res, next) {
-    console.log('req.headers: ', req.headers);
     const tokenHeader = req.headers.authorization;
     console.log('tokenHeader: ', tokenHeader);
     if (!tokenHeader) return res.status(400).send({ ERROR: 'User not found' });
